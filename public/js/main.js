@@ -13,7 +13,11 @@ socket.emit('joinRoom', { username, room });
 socket.on("message", (message) => {
   outputMessage(message);
   chatMessages.scrollTop = chatMessages.scrollHeight;
-  roomNameElement.innerHTML = room;
+});
+
+socket.on('roomUsers', ({ room, users }) => {
+  outputRoomName(room);
+  outputUsers(users);
 });
 
 chatFormElement.addEventListener('submit', (e) => {
@@ -31,4 +35,14 @@ const outputMessage = ( { username, text, time } ) => {
   div.innerHTML = `<p class='meta'>${username} <span>${time}</span></p>
     <p class='text'> ${text} </p>`;
   document.querySelector('.chat-messages').appendChild(div);
+}
+
+const outputRoomName = ( room ) => {
+  roomNameElement.innerHTML = room;
+}
+
+const outputUsers = ( users ) => {
+  usersElement.innerHTML = users.map(user => {
+    return `<li>${user.username}</li>`
+  }).join('');
 }

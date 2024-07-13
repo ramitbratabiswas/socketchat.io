@@ -10,10 +10,10 @@ export const getCurrentUser = (id) => {
   return users.find(user => user.id === id);
 }
 
-export const userLeave = (id) => {
+export const listAfterUserLeave = (id) => {
   const index = users.findIndex(user => user.id === id);
-  if (index === -1) {
-    return users.splice(index, 1)[0];
+  if (index !== -1) {
+    return users.splice(index, 1);
   }
 }
 

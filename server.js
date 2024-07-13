@@ -4,7 +4,7 @@ import path, { format } from "path";
 import http from "http";
 import * as socketio from "socket.io";
 import { formatMessage } from './utils/messages.js';
-import { userJoin, getCurrentUser, userLeave, getRoomUsers } from "./utils/users.js";
+import { userJoin, getCurrentUser, listAfterUserLeave, getRoomUsers } from "./utils/users.js";
 
 dotenv.config();
 
@@ -23,6 +23,7 @@ io.on('connection', socket => {
     const user = userJoin(socket.id, username, room);
     socket.emit('message', formatMessage(bot, 'welcome kitten'));
     socket.broadcast.emit('message', formatMessage(bot, `a new kitten, ${user.username}, has joined`));
+    io.emit('roomUsers', { room: user.room, users: getRoomUsers(user.room) });
  
   });
 
@@ -32,7 +33,13 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', () => {
-    io.emit('message', formatMessage(bot, 'a kitten has left'));
+    const user = getCurrentUser(socket.id);
+    
+    if (user) {
+      io.emit('message', formatMessage(bot, `a kitten, ${user.username}, has left`));
+      io.emit('roomUsers', { room: user.room, users: getRoomUsers(user.room) });
+    }
+
   });
 
 })
