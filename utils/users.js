@@ -10,8 +10,8 @@ export const getCurrentUser = (id) => {
   return users.find(user => user.id === id);
 }
 
-export const listAfterUserLeave = (id) => {
-  users = users.filter(user => user.id !== id);
+export const listAfterUserLeave = (user) => {
+  users = users.filter(elem => user.id !== elem.id);
   return users;
 }
 

@@ -37,7 +37,7 @@ io.on('connection', socket => {
     
     if (user) {
       io.emit('message', formatMessage(bot, `a kitten, ${user.username}, has left`));
-      io.emit('roomUsers', { room: user.room, users: listAfterUserLeave(socket.id) });
+      io.to(user.room).emit('roomUsers', { room: user.room, users: listAfterUserLeave(user).filter(elem => elem.room === user.room) });
     }
 
   });
