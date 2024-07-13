@@ -4,6 +4,7 @@ import path, { format } from "path";
 import http from "http";
 import * as socketio from "socket.io";
 import { formatMessage } from './utils/messages.js';
+import { userJoin, getCurrentUser, userLeave, getRoomUsers } from "./utils/users.js";
 
 dotenv.config();
 
@@ -19,14 +20,12 @@ io.on('connection', socket => {
   console.log('new websocket connection...');
   socket.emit('message', formatMessage(bot, 'welcome kitten'));
 
-  socket.broadcast.emit('message', 'whats your eta');
-
   socket.on('disconnect', () => {
     io.emit(formatMessage(bot, 'a kitten has left'));
   });
 
   socket.on('chatMessage', (msg) => {
-    io.emit('message', msg);
+    io.emit('message', formatMessage('user', msg));
   })
 
 })
