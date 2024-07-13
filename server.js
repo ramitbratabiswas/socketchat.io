@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import path, { format } from "path";
+import path from "path";
 import http from "http";
 import * as socketio from "socket.io";
 import { formatMessage } from './utils/messages.js';
@@ -37,7 +37,7 @@ io.on('connection', socket => {
     
     if (user) {
       io.emit('message', formatMessage(bot, `a kitten, ${user.username}, has left`));
-      io.emit('roomUsers', { room: user.room, users: getRoomUsers(user.room) });
+      io.emit('roomUsers', { room: user.room, users: listAfterUserLeave(socket.id) });
     }
 
   });

@@ -1,4 +1,4 @@
-const users = [];
+let users = [];
 
 export const userJoin = (id, username, room) => {
   const user = { id, username, room };
@@ -11,10 +11,8 @@ export const getCurrentUser = (id) => {
 }
 
 export const listAfterUserLeave = (id) => {
-  const index = users.findIndex(user => user.id === id);
-  if (index !== -1) {
-    return users.splice(index, 1);
-  }
+  users = users.filter(user => user.id !== id);
+  return users;
 }
 
 export const getRoomUsers = (room) => {
