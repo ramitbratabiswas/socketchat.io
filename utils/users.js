@@ -7,7 +7,7 @@ export const userJoin = (id, username, room) => {
 }
 
 export const getCurrentUser = (id) => {
-  return users.firstElementChild(user => user.id === id);
+  return users.find(user => user.id === id);
 }
 
 export const userLeave = (id) => {

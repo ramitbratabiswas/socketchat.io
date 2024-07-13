@@ -17,16 +17,23 @@ const server = http.createServer(app);
 const io = new socketio.Server(server);
 
 io.on('connection', socket => {
-  console.log('new websocket connection...');
-  socket.emit('message', formatMessage(bot, 'welcome kitten'));
 
-  socket.on('disconnect', () => {
-    io.emit(formatMessage(bot, 'a kitten has left'));
+  socket.on('joinRoom', ({ username, room }) => {
+
+    const user = userJoin(socket.id, username, room);
+    socket.emit('message', formatMessage(bot, 'welcome kitten'));
+    socket.broadcast.emit('message', formatMessage(bot, `a new kitten, ${user.username}, has joined`));
+ 
   });
 
   socket.on('chatMessage', (msg) => {
-    io.emit('message', formatMessage('user', msg));
-  })
+    const user = getCurrentUser(socket.id);
+    io.emit('message', formatMessage(user.username, msg));
+  });
+
+  socket.on('disconnect', () => {
+    io.emit('message', formatMessage(bot, 'a kitten has left'));
+  });
 
 })
 

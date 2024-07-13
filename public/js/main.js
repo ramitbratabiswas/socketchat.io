@@ -8,6 +8,8 @@ const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get("username");
 const room = urlParams.get("room");
 
+socket.emit('joinRoom', { username, room });
+
 socket.on("message", (message) => {
   outputMessage(message);
   chatMessages.scrollTop = chatMessages.scrollHeight;
