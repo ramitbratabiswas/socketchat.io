@@ -13,29 +13,19 @@ const currentUser = urlParams.get("username");
 const room = urlParams.get("room");
 console.log(urlParams);
 
-console.log(socket);
-
 socket.emit('joinRoom', { username: currentUser, room });
 
 socket.on("message", (message) => {
-
-  console.log(socket);
 
   outputMessage(message);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
-console.log(socket);
-
 socket.on('roomUsers', ({ room, users }) => {
-
-  console.log(socket);
 
   outputRoomName(room);
   outputUsers(users);
 });
-
-console.log(socket);
 
 chatFormElement.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -46,7 +36,6 @@ chatFormElement.addEventListener('submit', (e) => {
   e.target.elements.msg.focus();
 });
 
-console.log(socket);
 
 const outputMessage = ( { username, text, time } ) => {
   const div = document.createElement("div");
@@ -71,9 +60,8 @@ const outputUsers = ( users ) => {
   }).join('');
 }
 
-console.log(socket);
-
 socket.on("connect_error", (err) => {
+  console.log("main.js connect_error")
   // the reason of the error, for example "xhr poll error"
   console.log(err.message);
 
