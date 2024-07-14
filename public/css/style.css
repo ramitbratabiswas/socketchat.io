@@ -159,9 +159,6 @@ a {
   overflow: hidden;
   text-overflow: clip;
 }
-.my-message > .meta span {
-  color: #a3ebc6
-}
 
 .chat-messages .other-message {
   align-self: flex-start;
