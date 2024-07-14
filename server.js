@@ -31,6 +31,8 @@ const io = new Server(server);
 
 io.on('connection', socket => {
 
+  console.log('someone connected')
+
   socket.on('joinRoom', ({ username, room }) => {
 
     const user = userJoin(socket.id, username, room);
