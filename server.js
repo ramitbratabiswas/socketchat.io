@@ -16,7 +16,10 @@ const corsOptions = {
   credentials: true
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions), {
+  transports: ['websocket', 'polling'],
+  allowEIO3: true
+});
 
 app.use(express.static(path.join(import.meta.url, '/../public')));
 console.log(path.join(import.meta.url, '/../public'));
@@ -39,7 +42,7 @@ io.on('connection', socket => {
     socket.emit('message', formatMessage(bot, 'welcome kitten'));
     socket.broadcast.emit('message', formatMessage(bot, `a new kitten, ${user.username}, has joined`));
     io.emit('roomUsers', { room: user.room, users: getRoomUsers(user.room) });
- 
+
   });
 
   socket.on('chatMessage', (msg) => {
@@ -49,7 +52,7 @@ io.on('connection', socket => {
 
   socket.on('disconnect', () => {
     const user = getCurrentUser(socket.id);
-    
+
     if (user) {
       io.emit('message', formatMessage(bot, `a kitten, ${user.username}, has left`));
       io.to(user.room).emit('roomUsers', { room: user.room, users: listAfterUserLeave(user).filter(elem => elem.room === user.room) });
