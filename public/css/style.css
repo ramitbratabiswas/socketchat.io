@@ -14,6 +14,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  text-overflow: clip;
+  overflow: hidden;
 }
 
 html, body {
@@ -107,6 +109,7 @@ a {
 .chat-sidebar h3 {
   margin-top: 20px;
   margin-bottom: 10px;
+  padding: 15px;
 }
 
 .chat-sidebar ul {
