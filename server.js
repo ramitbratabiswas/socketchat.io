@@ -1,17 +1,18 @@
 import express from 'express';
 import path from "path";
 import http from "http";
-import * as socketio from "socket.io";
+import { Server } from "socket.io";
 import { formatMessage } from './utils/messages.js';
 import { userJoin, getCurrentUser, listAfterUserLeave, getRoomUsers } from "./utils/users.js";
 
 const bot = 'mod';
 
 const app = express();
-app.use(express.static(path.join(import.meta.url, 'public')));
+app.use(express.static(path.join(import.meta.url, '/../public')));
+console.log(path.join(import.meta.url, '/../public'));
 
 const server = http.createServer(app);
-const io = new socketio.Server(server);
+const io = new Server(server);
 
 io.on('connection', socket => {
 

@@ -1,4 +1,4 @@
-const socket = io(`localhost:8080`);
+const socket = io();
 const chatFormElement = document.getElementById('chat-form');
 const roomNameElement = document.getElementById('room-name');
 const usersElement = document.getElementById("users");
