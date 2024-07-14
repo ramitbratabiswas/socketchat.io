@@ -16,12 +16,9 @@ const corsOptions = {
   credentials: true
 };
 
-app.use(cors(corsOptions), {
-  transports: ['websocket', 'polling'],
-  allowEIO3: true
-});
+app.use(cors(corsOptions));
 
-app.use(express.static(path.join(import.meta.url, '/../public')));
+app.use(express.static(path.join(import.meta.dirname, '/public')));
 console.log(path.join(import.meta.url, '/../public'));
 
 const port = process.env.port || 8080;
