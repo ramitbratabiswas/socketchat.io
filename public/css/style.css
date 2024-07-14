@@ -138,6 +138,7 @@ a {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 70%;
 }
 
 .chat-messages .message .meta {
@@ -149,6 +150,21 @@ a {
 
 .chat-messages .message .meta span {
   color: #777;
+}
+
+.chat-messages .my-message {
+  background: var(--primary-color);
+  align-self: flex-end;
+  color: white;
+  overflow: hidden;
+  text-overflow: clip;
+}
+.my-message > .meta span {
+  color: #a3ebc6
+}
+
+.chat-messages .other-message {
+  align-self: flex-start;
 }
 
 .chat-form-container {
