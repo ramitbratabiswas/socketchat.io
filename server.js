@@ -1,12 +1,9 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import path from "path";
 import http from "http";
 import * as socketio from "socket.io";
 import { formatMessage } from './utils/messages.js';
 import { userJoin, getCurrentUser, listAfterUserLeave, getRoomUsers } from "./utils/users.js";
-
-dotenv.config();
 
 const bot = 'mod';
 
@@ -44,7 +41,7 @@ io.on('connection', socket => {
 
 })
 
-const port = process.env.PORT || 3000;
+const port = 8080;
 
 server.listen(port, () => {
   console.log(`listening on port ${port}`);
