@@ -8,7 +8,7 @@ import { userJoin, getCurrentUser, listAfterUserLeave, getRoomUsers } from "./ut
 const bot = 'mod';
 
 const app = express();
-app.use(express.static(path.join(import.meta.dirname, 'public')));
+app.use(express.static(path.join(import.meta.url, 'public')));
 
 const server = http.createServer(app);
 const io = new socketio.Server(server);
