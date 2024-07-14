@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io('https://main--socketchat-io.netlify.app/');
 const chatFormElement = document.getElementById('chat-form');
 const roomNameElement = document.getElementById('room-name');
 const usersElement = document.getElementById("users");
