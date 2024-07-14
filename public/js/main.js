@@ -1,3 +1,7 @@
+import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+  
+const socket = io();
+
 const chatFormElement = document.getElementById('chat-form');
 const roomNameElement = document.getElementById('room-name');
 const usersElement = document.getElementById("users");
