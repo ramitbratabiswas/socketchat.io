@@ -1,6 +1,7 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
   
 const socket = io('https://main--socketchat-io.netlify.app');
+console.log(socket);
 
 const chatFormElement = document.getElementById('chat-form');
 const roomNameElement = document.getElementById('room-name');
@@ -10,6 +11,7 @@ const chatMessages = document.querySelector('.chat-messages');
 const urlParams = new URLSearchParams(window.location.search);
 const currentUser = urlParams.get("username");
 const room = urlParams.get("room");
+console.log(urlParams);
 
 socket.emit('joinRoom', { username: currentUser, room });
 
