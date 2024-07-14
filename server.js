@@ -1,6 +1,7 @@
 import express from 'express';
 import path from "path";
 import http from "http";
+import cors from 'cors';
 import { Server } from "socket.io";
 import { formatMessage } from './utils/messages.js';
 import { userJoin, getCurrentUser, listAfterUserLeave, getRoomUsers } from "./utils/users.js";
@@ -8,6 +9,15 @@ import { userJoin, getCurrentUser, listAfterUserLeave, getRoomUsers } from "./ut
 const bot = 'mod';
 
 const app = express();
+
+const corsOptions = {
+  origin: 'https://socketchat-io.netlify.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.static(path.join(import.meta.url, '/../public')));
 console.log(path.join(import.meta.url, '/../public'));
 
