@@ -1,6 +1,5 @@
 import express from 'express';
 import path from "path";
-import http from "http";
 import cors from 'cors';
 import { Server } from "socket.io";
 import { formatMessage } from './utils/messages.js';
@@ -11,9 +10,10 @@ const bot = 'mod';
 const app = express();
 
 const corsOptions = {
-  origin: 'https://socketchat-io.netlify.app',
+  origin: '/',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
+  credentials: true
 };
 
 app.use(cors(corsOptions));
@@ -21,7 +21,12 @@ app.use(cors(corsOptions));
 app.use(express.static(path.join(import.meta.url, '/../public')));
 console.log(path.join(import.meta.url, '/../public'));
 
-const server = http.createServer(app);
+const port = process.env.port || 8080;
+
+const server = app.listen(port, () => {
+  console.log(`listening on port ${port}`);
+});
+
 const io = new Server(server);
 
 io.on('connection', socket => {
@@ -51,9 +56,3 @@ io.on('connection', socket => {
   });
 
 })
-
-const port = process.env.port || 8080;
-
-server.listen(port, () => {
-  console.log(`listening on port ${port}`);
-});

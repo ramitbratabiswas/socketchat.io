@@ -1,6 +1,6 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
   
-const socket = io('https://socketchat-io.netlify.app');
+const socket = io();
 console.log(socket);
 
 const chatFormElement = document.getElementById('chat-form');
@@ -13,17 +13,29 @@ const currentUser = urlParams.get("username");
 const room = urlParams.get("room");
 console.log(urlParams);
 
+console.log(socket);
+
 socket.emit('joinRoom', { username: currentUser, room });
 
 socket.on("message", (message) => {
+
+  console.log(socket);
+
   outputMessage(message);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+console.log(socket);
+
 socket.on('roomUsers', ({ room, users }) => {
+
+  console.log(socket);
+
   outputRoomName(room);
   outputUsers(users);
 });
+
+console.log(socket);
 
 chatFormElement.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -33,6 +45,8 @@ chatFormElement.addEventListener('submit', (e) => {
   e.target.elements.msg.value = "";
   e.target.elements.msg.focus();
 });
+
+console.log(socket);
 
 const outputMessage = ( { username, text, time } ) => {
   const div = document.createElement("div");
@@ -56,3 +70,5 @@ const outputUsers = ( users ) => {
     return `<li>${user.username}</li>`
   }).join('');
 }
+
+console.log(socket);
