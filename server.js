@@ -11,7 +11,7 @@ const bot = 'mod';
 const app = express();
 
 const corsOptions = {
-  origin: 'https://main--socketchat-io.netlify.app',
+  origin: 'https://socketchat-io.netlify.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
 };

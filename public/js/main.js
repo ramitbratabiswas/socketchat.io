@@ -1,6 +1,6 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
   
-const socket = io('https://main--socketchat-io.netlify.app');
+const socket = io('https://socketchat-io.netlify.app');
 console.log(socket);
 
 const chatFormElement = document.getElementById('chat-form');
