@@ -1,6 +1,6 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
   
-const socket = io('https://main--socketchat-io.netlify.app');
+const socket = io('https://socketchat-io.netlify.app');
 
 const chatFormElement = document.getElementById('chat-form');
 const roomNameElement = document.getElementById('room-name');
@@ -11,17 +11,17 @@ const urlParams = new URLSearchParams(window.location.search);
 const currentUser = urlParams.get("username");
 const room = urlParams.get("room");
 
-socket.emit('joinRoom', { username: currentUser, room });
+// socket.emit('joinRoom', { username: currentUser, room });
 
-socket.on("message", (message) => {
-  outputMessage(message);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-});
+// socket.on("message", (message) => {
+//   outputMessage(message);
+//   chatMessages.scrollTop = chatMessages.scrollHeight;
+// });
 
-socket.on('roomUsers', ({ room, users }) => {
-  outputRoomName(room);
-  outputUsers(users);
-});
+// socket.on('roomUsers', ({ room, users }) => {
+//   outputRoomName(room);
+//   outputUsers(users);
+// });
 
 chatFormElement.addEventListener('submit', (e) => {
   e.preventDefault();
